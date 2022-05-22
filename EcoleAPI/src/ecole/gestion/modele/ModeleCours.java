@@ -1,4 +1,4 @@
-package ecole.gestion.modole;
+package ecole.gestion.modele;
 
 import ecole.metier.Cours;
 

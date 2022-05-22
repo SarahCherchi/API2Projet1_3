@@ -1,10 +1,8 @@
-package ecole.gestion.modole;
+package ecole.gestion.modele;
 
 import ecole.metier.Enseignant;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ModeleEnseignant implements DAOEnseignant {
