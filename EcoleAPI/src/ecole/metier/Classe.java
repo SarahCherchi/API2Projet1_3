@@ -17,6 +17,13 @@ public class Classe {
     public Classe() {
     }
 
+    public Classe(String sigle, int annee, String specialite, int nbrEleves) {
+        this.sigle = sigle;
+        this.annee = annee;
+        this.specialite = specialite;
+        this.nbrEleves = nbrEleves;
+    }
+
     public Classe(int idClasse, String sigle, int annee) {
         this.idClasse = idClasse;
         this.sigle = sigle;
