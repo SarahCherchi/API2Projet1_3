@@ -51,22 +51,6 @@ public class ModeleClasse implements DAOClasse{
     }
 
     @Override
-    public boolean addCours(Classe cl, Cours c, int heures) {
-        /*Produit p = l.getProduit();
-        int q = l.getQuantite();
-        if (p.retirer(q)) {
-            boolean res = cf.addLigne(l);
-            if (res) {
-                update(cf);
-                return true;
-            } else {
-                p.reapprovisionner(q);
-                return false;
-            }
-        } else */return false;
-    }
-
-    @Override
     public List<Classe> readAll() {
         return mesClasse;
     }

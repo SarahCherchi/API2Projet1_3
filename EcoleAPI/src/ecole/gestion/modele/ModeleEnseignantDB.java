@@ -30,7 +30,7 @@ public class ModeleEnseignantDB implements DAOEnseignant {
             pstm1.setString(4, ens.getTel());
             pstm1.setInt(5, ens.getChargeSem());
             pstm1.setBigDecimal(6, ens.getSalaireMensu());
-           // pstm1.setDate(7, ens.getDateEngag());
+            pstm1.setDate(7, java.sql.Date.valueOf(String.valueOf(ens.getDateEngag())));
             int n = pstm1.executeUpdate();
             if (n == 0) {
                 return null;
@@ -81,16 +81,17 @@ public class ModeleEnseignantDB implements DAOEnseignant {
 
     @Override
     public Enseignant update(Enseignant ens) {
-        String req = "update apienseignant set matricule=?,nom=?,prenom=?,tel=?,chargesem=?,salairemensu=? where idenseignant= ?";
+        String req = "update apienseignant set matricule=?,nom=?,prenom=?,tel=?,chargesem=?,salairemensu=?,dateengag=? where idenseignant= ?";
         try ( PreparedStatement pstm = dbConnect.prepareStatement(req)) {
 
-            pstm.setInt(7, ens.getIdEnseignant());
+            pstm.setInt(8, ens.getIdEnseignant());
             pstm.setString(1, ens.getMatricule());
             pstm.setString(2, ens.getNom());
             pstm.setString(3, ens.getPrenom());
             pstm.setString(4, ens.getTel());
             pstm.setInt(5, ens.getChargeSem());
             pstm.setBigDecimal(6, ens.getSalaireMensu());
+            pstm.setDate(7, java.sql.Date.valueOf(String.valueOf(ens.getDateEngag())));
 
             int n = pstm.executeUpdate();
             if (n == 0) {

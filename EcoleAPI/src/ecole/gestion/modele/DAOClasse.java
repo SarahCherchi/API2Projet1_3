@@ -16,6 +16,4 @@ public interface DAOClasse extends DAO<Classe>{
 
     List<Classe> readAll();*/
 
-    boolean addCours(Classe cl, Cours c,int heures);
-    //ajouter update et delete
 }
