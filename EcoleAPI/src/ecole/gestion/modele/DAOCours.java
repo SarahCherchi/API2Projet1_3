@@ -4,9 +4,9 @@ import ecole.metier.Cours;
 
 import java.util.List;
 
-public interface DAOCours {
+public interface DAOCours extends DAO<Cours>{
 
-    Cours create(Cours newcr);
+    /*Cours create(Cours newcr);
 
     boolean delete(Cours crrech);
 
@@ -14,5 +14,5 @@ public interface DAOCours {
 
     Cours update(Cours crrech);
 
-    List<Cours> readAll();
+    List<Cours> readAll(); */
 }

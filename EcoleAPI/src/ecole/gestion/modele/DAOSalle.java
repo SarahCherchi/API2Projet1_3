@@ -4,8 +4,8 @@ import ecole.metier.Salle;
 
 import java.util.List;
 
-public interface DAOSalle {
-    Salle create(Salle newsl);
+public interface DAOSalle extends DAO<Salle>{
+    /* Salle create(Salle newsl);
 
     boolean delete(Salle slrech);
 
@@ -13,5 +13,5 @@ public interface DAOSalle {
 
     Salle update(Salle slrech);
 
-    List<Salle> readAll();
+    List<Salle> readAll(); */
 }

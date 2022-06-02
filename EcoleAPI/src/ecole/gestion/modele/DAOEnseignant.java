@@ -4,8 +4,8 @@ import ecole.metier.Enseignant;
 
 import java.util.List;
 
-public interface DAOEnseignant {
-    Enseignant create(Enseignant newens);
+public interface DAOEnseignant extends DAO<Enseignant>{
+    /*Enseignant create(Enseignant newens);
 
     boolean delete(Enseignant ensrech);
 
@@ -13,5 +13,5 @@ public interface DAOEnseignant {
 
     Enseignant update(Enseignant ensrech);
 
-    List<Enseignant> readAll();
+    List<Enseignant> readAll(); */
 }

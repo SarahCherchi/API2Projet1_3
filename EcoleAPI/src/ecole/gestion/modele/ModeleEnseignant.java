@@ -5,7 +5,7 @@ import ecole.metier.Enseignant;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModeleEnseignant implements DAOEnseignant {
+public class ModeleEnseignant implements DAOEnseignant{
     private List<Enseignant> mesEnseignant = new ArrayList<>();
 
     @Override

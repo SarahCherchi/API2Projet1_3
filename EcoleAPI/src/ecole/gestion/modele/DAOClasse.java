@@ -5,8 +5,8 @@ import ecole.metier.Cours;
 
 import java.util.List;
 
-public interface DAOClasse {
-    Classe create(Classe newcl);
+public interface DAOClasse extends DAO<Classe>{
+    /*Classe create(Classe newcl);
 
     boolean delete(Classe clrech);
 
@@ -14,7 +14,8 @@ public interface DAOClasse {
 
     Classe update(Classe clrech);
 
-    boolean addCours(Classe cl, Cours c,int heures);
+    List<Classe> readAll();*/
 
-    List<Classe> readAll();
+    boolean addCours(Classe cl, Cours c,int heures);
+    //ajouter update et delete
 }

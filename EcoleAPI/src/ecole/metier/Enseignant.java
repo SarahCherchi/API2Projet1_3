@@ -11,20 +11,31 @@ public class Enseignant {
     protected String nom;
     protected String prenom;
     protected String tel;
-    protected BigDecimal chargeSem;
+    protected int chargeSem;
+    protected BigDecimal salaireMensu;
     protected Date dateEngag;
 
     public Enseignant() {
     }
 
-    public Enseignant(int idEnseignant, String matricule, String nom, String prenom, String tel, BigDecimal chargeSem, Date dateEngag) {
+    public Enseignant(String matricule, String nom, String prenom, String tel, int chargeSem, BigDecimal salaireMensu, Date dateEngag) {
+        this.matricule = matricule;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.tel = tel;
+        this.chargeSem = chargeSem;
+        this.salaireMensu = salaireMensu;
+        this.dateEngag = dateEngag;
+    }
+
+    public Enseignant(int idEnseignant, String matricule, String nom, String prenom, String tel, int chargeSem, BigDecimal salaireMensu, Date dateEngag) {
         this.idEnseignant = idEnseignant;
         this.matricule = matricule;
         this.nom = nom;
         this.prenom = prenom;
         this.tel = tel;
         this.chargeSem = chargeSem;
-        chargeSem.setScale(2, RoundingMode.HALF_UP);
+        this.salaireMensu = salaireMensu;
         this.dateEngag = dateEngag;
     }
 
@@ -68,12 +79,20 @@ public class Enseignant {
         this.tel = tel;
     }
 
-    public BigDecimal getChargeSem() {
+    public int getChargeSem() {
         return chargeSem;
     }
 
-    public void setChargeSem(BigDecimal chargeSem) {
+    public void setChargeSem(int chargeSem) {
         this.chargeSem = chargeSem;
+    }
+
+    public BigDecimal getSalaireMensu() {
+        return salaireMensu;
+    }
+
+    public void setSalaireMensu(BigDecimal salaireMensu) {
+        this.salaireMensu = salaireMensu;
     }
 
     public Date getDateEngag() {
@@ -106,6 +125,7 @@ public class Enseignant {
                 ", prenom='" + prenom + '\'' +
                 ", tel='" + tel + '\'' +
                 ", chargeSem=" + chargeSem +
+                ", salaireMensu=" + salaireMensu +
                 ", dateEngag=" + dateEngag +
                 '}';
     }
