@@ -13,6 +13,12 @@ public class Cours {
     public Cours() {
     }
 
+    public Cours(String code, String intitule, Salle salleParDefault) {
+        this.code = code;
+        this.intitule = intitule;
+        this.salleParDefault = salleParDefault;
+    }
+
     public Cours(int idCours, String code, String intitule) {
         this.idCours = idCours;
         this.code = code;

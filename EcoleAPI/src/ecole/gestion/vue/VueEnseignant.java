@@ -51,9 +51,8 @@ public class VueEnseignant extends VueCommune implements VueEnseignantInterface{
 
 
     @Override
-    public Integer read() {
-        String ns = getMsg("numero de l'enseignant : ");
-        int n = Integer.parseInt(ns);
+    public String read() {
+        String n = getMsg("matricule de l'enseignant : ");
         return n;
     }
 

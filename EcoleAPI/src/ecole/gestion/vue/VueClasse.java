@@ -56,9 +56,8 @@ public class VueClasse extends VueCommune implements VueClasseInterface{
 
 
     @Override
-    public Integer read() {
-        String ns = getMsg("numéro de classe : ");
-        int n = Integer.parseInt(ns);
+    public String read() {
+        String n = getMsg("sigle de classe : ");
         return n;
     }
 

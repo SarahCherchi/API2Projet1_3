@@ -1,19 +1,10 @@
 package ecole.gestion.modele;
 
 import ecole.metier.Classe;
-import ecole.metier.Cours;
-
-import java.util.List;
+import ecole.metier.Infos;
 
 public interface DAOClasse extends DAO<Classe>{
-    /*Classe create(Classe newcl);
-
-    boolean delete(Classe clrech);
-
-    Classe read(Classe clrech);
-
-    Classe update(Classe clrech);
-
-    List<Classe> readAll();*/
+    boolean addInfo(Classe cl, Infos i);
+    boolean suppInfo(Classe cl, Infos i);
 
 }
