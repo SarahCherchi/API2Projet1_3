@@ -13,6 +13,11 @@ public class Salle {
     public Salle() {
     }
 
+    public Salle(String sigle, int capacité) {
+        this.sigle = sigle;
+        this.capacité = capacité;
+    }
+
     public Salle(int idSalle, String sigle, int capacité) {
         this.idSalle = idSalle;
         this.sigle = sigle;
