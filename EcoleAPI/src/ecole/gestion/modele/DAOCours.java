@@ -16,5 +16,4 @@ public interface DAOCours extends DAO<Cours>{
 
     List<Cours> readAll(); */
 
-    void displayMsg(String msg);
 }

@@ -52,9 +52,6 @@ public class ModeleCours implements DAOCours{
     public List<Cours> readAll() {
         return mesCours;
     }
-    @Override
-    public void displayMsg(String msg) {
-        System.out.println(msg);
-    }
+
 
 }

@@ -100,15 +100,8 @@ public class PresenterCours {
         }
     }
 
-    protected Cours affAll() {
-        List<Cours> lc = mdc.readAll();
+    protected void affAll() {
         vuec.affAll(mdc.readAll());
-        do{
-            String chs=vuec.getMsg("numéro de l'élément choisi (0 pour aucun) :");
-            int ch=Integer.parseInt(chs);
-            if(ch==0)return null;
-            if(ch>=1 && ch <= lc.size()) return lc.get(ch-1);
-        } while(true);
     }
 
 }
