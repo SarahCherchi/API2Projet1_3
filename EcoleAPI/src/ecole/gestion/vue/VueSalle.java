@@ -10,7 +10,8 @@ public class VueSalle extends VueCommune implements VueSalleInterface{
     @Override
     public Salle create() {
         String sigle = getMsg("sigle : ");
-        Integer capacité = Integer.parseInt(getMsg("capacité: "));
+        String cap = getMsg("capacité :");
+        int capacité = Integer.parseInt(cap);
         Salle newsl = new Salle(sigle, capacité);
         return newsl;
     }

@@ -2,6 +2,7 @@ package ecole.gestion.vue;
 
 
 import ecole.metier.Cours;
+import ecole.metier.Salle;
 
 
 import java.util.List;
@@ -9,11 +10,16 @@ import java.util.List;
 public class VueCours extends VueCommune implements VueCoursInterface {
 
     @Override
-    public Cours create() {
+    public Cours createSD(Salle s) {
         String code = getMsg("code cours : ");
         String intitulé = getMsg("intitulé: ");
-        Cours newcr = new Cours(code, intitulé);
+        Cours newcr = new Cours(code, intitulé,s);
         return newcr;
+    }
+
+    @Override
+    public Cours create() {
+        return null; //pour le constructeur
     }
 
 

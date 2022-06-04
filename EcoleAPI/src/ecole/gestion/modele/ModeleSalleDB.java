@@ -20,15 +20,12 @@ public class ModeleSalleDB implements DAOSalle{
     @Override
     public Salle create(Salle sl) {
 
-        String req1 = "insert into apiclient(sigle,capacité) values(?,?)";
+        String req1 = "insert into apisalle(sigle,capacité) values(?,?)";
         String req2 = "select idsalle from apisalle where sigle=?";
         try (PreparedStatement pstm1 = dbConnect.prepareStatement(req1); PreparedStatement pstm2 = dbConnect.prepareStatement(req2)) {
             pstm1.setString(1, sl.getSigle());
             pstm1.setInt(2, sl.getCapacité());
             int n = pstm1.executeUpdate();
-            if (n == 0) {
-                return null;
-            }
             pstm2.setString(1, sl.getSigle());
             ResultSet rs = pstm2.executeQuery();
             if (rs.next()) {
@@ -36,7 +33,7 @@ public class ModeleSalleDB implements DAOSalle{
                 sl.setIdSalle(idsalle);
                 return sl;
             } else {
-                throw new Exception("aucune salle trouvé");
+               return null;
             }
         }
         catch (Exception e){
@@ -46,21 +43,21 @@ public class ModeleSalleDB implements DAOSalle{
 
     @Override
     public Salle read(Salle salle) {
-        String req = "select * from apisalle where idsalle = ?";
+        String req = "select * from sallecours where SIGLE = ?";
         try ( PreparedStatement pstm = dbConnect.prepareStatement(req);) {
-            pstm.setInt(1, salle.getIdSalle());
+            pstm.setString(1, salle.getSigle());
             ResultSet rs = pstm.executeQuery() ;
             if (rs.next()) {
-                String sigle = rs.getString("SIGLE");
-                int capacité = rs.getInt("CAPACITE");
+                int idsalle = rs.getInt("IDSALLE");
+                int capacité = rs.getInt("CAPACITÉ");
 
-                Salle sl = new Salle(salle.getIdSalle(), sigle, capacité);
+                Salle sl = new Salle(idsalle, salle.getSigle(), capacité);
                 List<Cours> lcr = new ArrayList<>();
                 if(rs.getInt("IDCOURS")!=0){
                     do{
-                        int idcours = rs.getInt("IDCOMMANDE");
+                        int idcours = rs.getInt("IDCOURS");
                         String code = rs.getString("CODE");
-                        String intitulé = rs.getString("INTITULE");
+                        String intitulé = rs.getString("INTITULÉ");
 
                         Cours cr = new Cours(idcours,code,intitulé,salle);
                         lcr.add(cr);
@@ -101,7 +98,7 @@ public class ModeleSalleDB implements DAOSalle{
     @Override
     public boolean delete(Salle sl) {
 
-        String req = "delete from apisalle where idsallet= ?";
+        String req = "delete from apisalle where idsalle= ?";
         try ( PreparedStatement pstm = dbConnect.prepareStatement(req)) {
 
             pstm.setInt(1, sl.getIdSalle());
@@ -122,7 +119,7 @@ public class ModeleSalleDB implements DAOSalle{
             while (rs.next()) {
                 int idsalle = rs.getInt("IDSALLE");
                 String sigle = rs.getString("SIGLE");
-                int capacité = rs.getInt("CAPACITE");
+                int capacité = rs.getInt("CAPACITÉ");
 
                 ls.add(new Salle(idsalle, sigle, capacité));
             }

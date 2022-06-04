@@ -15,4 +15,6 @@ public interface DAOCours extends DAO<Cours>{
     Cours update(Cours crrech);
 
     List<Cours> readAll(); */
+
+    void displayMsg(String msg);
 }

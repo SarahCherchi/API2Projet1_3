@@ -98,15 +98,8 @@ public class PresenterEnseignant {
         }
     }
 
-    protected Enseignant affAll() {
-        List<Enseignant> le = mde.readAll();
+    protected void affAll() {
         vuee.affAll(mde.readAll());
-        do{
-            String chs=vuee.getMsg("numéro de l'élément choisi (0 pour aucun) :");
-            int ch=Integer.parseInt(chs);
-            if(ch==0)return null;
-            if(ch>=1 && ch <= le.size()) return le.get(ch-1);
-        } while(true);
     }
 
 }

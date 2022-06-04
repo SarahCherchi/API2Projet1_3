@@ -21,7 +21,7 @@ public class ModeleCoursDB implements DAOCours{
     public Cours create(Cours cr) {
 
         String req1 = "insert into apicours(code,intitulé,idsalle) values(?,?,?)";
-        String req2 = "select idcours from apicours where code=? ";
+        String req2 = "select MAX(idcours) from apicours where idsalle=? ";
         try ( PreparedStatement pstm1 = dbConnect.prepareStatement(req1);  PreparedStatement pstm2 = dbConnect.prepareStatement(req2)) {
             pstm1.setString(1, cr.getCode());
             pstm1.setString(2, cr.getIntitule());
@@ -30,37 +30,38 @@ public class ModeleCoursDB implements DAOCours{
             if (n == 0) {
                 return null;
             }
-            pstm2.setString(1, cr.getCode());
+            pstm2.setInt(1, cr.getSalleParDefault().getIdSalle());
             ResultSet rs = pstm2.executeQuery();
             if (rs.next()) {
                 int idcours = rs.getInt(1);
                 cr.setIdCours(idcours);
                 return cr;
             } else {
-                throw new Exception("aucun cours trouvé");
+                return null;
             }
         }
         catch (Exception e){
+            displayMsg(e.getMessage());
             return null;
         }
     }
 
     @Override
     public Cours read(Cours cours) {
-        String req = "select * from apicours where idcours = ?";
+        String req = "select * from sallecours where CODE = ?";
         try ( PreparedStatement pstm = dbConnect.prepareStatement(req);) {
-            pstm.setInt(1, cours.getIdCours());
+            pstm.setString(1, cours.getCode());
             ResultSet rs = pstm.executeQuery() ;
             if (rs.next()) {
-                String code = rs.getString("CODE");
-                String intitule = rs.getString("INTITULE");
+                int idcours = rs.getInt("IDCOURS");
+                String intitule = rs.getString("INTITULÉ");
 
                 int idsalle = rs.getInt("IDSALLE");
                 String sigle = rs.getString("SIGLE");
-                int capacite = rs.getInt("CAPACITE");
+                int capacite = rs.getInt("CAPACITÉ");
 
                 Salle sl = new Salle(idsalle,sigle,capacite);
-                Cours cr = new Cours(cours.getIdCours(),code,intitule,sl);
+                Cours cr = new Cours(idcours, cours.getCode(),intitule,sl);
                 return cr;
 
             } else {
@@ -115,7 +116,7 @@ public class ModeleCoursDB implements DAOCours{
             while (rs.next()) {
                 int idcours = rs.getInt("IDCOURS");
                 String code = rs.getString("CODE");
-                String intitule = rs.getString("INTITULE");
+                String intitule = rs.getString("INTITULÉ");
 
                 lc.add(new Cours(idcours, code, intitule,null));
             }
@@ -126,5 +127,9 @@ public class ModeleCoursDB implements DAOCours{
         catch (Exception e){
             return null;
         }
+    }
+    @Override
+    public void displayMsg(String msg) {
+        System.out.println(msg);
     }
 }

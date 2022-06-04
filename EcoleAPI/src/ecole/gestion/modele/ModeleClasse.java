@@ -2,12 +2,15 @@ package ecole.gestion.modele;
 
 import ecole.metier.Classe;
 import ecole.metier.Cours;
+import ecole.metier.Infos;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModeleClasse implements DAOClasse{
+
     private List<Classe> mesClasse=new ArrayList<>();
+
     @Override
     public Classe create(Classe newcl) {
         if(mesClasse.contains(newcl)) return null;

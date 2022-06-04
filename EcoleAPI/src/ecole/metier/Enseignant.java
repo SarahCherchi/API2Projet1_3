@@ -2,6 +2,7 @@ package ecole.metier;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,12 +14,12 @@ public class Enseignant {
     protected String tel;
     protected int chargeSem;
     protected BigDecimal salaireMensu;
-    protected Date dateEngag;
+    protected LocalDate dateEngag;
 
     public Enseignant() {
     }
 
-    public Enseignant(String matricule, String nom, String prenom, String tel, int chargeSem, BigDecimal salaireMensu, Date dateEngag) {
+    public Enseignant(String matricule, String nom, String prenom, String tel, int chargeSem, BigDecimal salaireMensu, LocalDate dateEngag) {
         this.matricule = matricule;
         this.nom = nom;
         this.prenom = prenom;
@@ -28,7 +29,7 @@ public class Enseignant {
         this.dateEngag = dateEngag;
     }
 
-    public Enseignant(int idEnseignant, String matricule, String nom, String prenom, String tel, int chargeSem, BigDecimal salaireMensu, Date dateEngag) {
+    public Enseignant(int idEnseignant, String matricule, String nom, String prenom, String tel, int chargeSem, BigDecimal salaireMensu, LocalDate dateEngag) {
         this.idEnseignant = idEnseignant;
         this.matricule = matricule;
         this.nom = nom;
@@ -95,11 +96,11 @@ public class Enseignant {
         this.salaireMensu = salaireMensu;
     }
 
-    public Date getDateEngag() {
+    public LocalDate getDateEngag() {
         return dateEngag;
     }
 
-    public void setDateEngag(Date dateEngag) {
+    public void setDateEngag(LocalDate dateEngag) {
         this.dateEngag = dateEngag;
     }
 

@@ -3,10 +3,14 @@ package ecole.gestion.vue;
 import ecole.metier.Enseignant;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Scanner;
 
 public class VueEnseignant extends VueCommune implements VueEnseignantInterface{
+
+    private Scanner sc = new Scanner(System.in);
+
     @Override
     public Enseignant create() {
         String matricule = getMsg("matricule : ");
@@ -17,8 +21,12 @@ public class VueEnseignant extends VueCommune implements VueEnseignantInterface{
         int chargeSem = Integer.parseInt(chargesem);
         String salairemensu = getMsg(" salaire mensuelle : ");
         BigDecimal salaireMensu = new BigDecimal(salairemensu);
-        String dateengag = getMsg("date engagement : ");
-        Date dateEngag = new Date(dateengag); //voir format date A
+        System.out.println("Date engagement (ex. 05 06 2022) : ");
+        int j = sc.nextInt();
+        int m = sc.nextInt();
+        int a = sc.nextInt();
+        sc.skip("\n");
+        LocalDate dateEngag= LocalDate.of(a,m,j);
         Enseignant newens = new Enseignant(matricule,nom,prenom,tel,chargeSem,salaireMensu,dateEngag);
         return newens;
     }

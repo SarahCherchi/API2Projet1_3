@@ -2,11 +2,7 @@ package ecole.gestion.presenter;
 
 import ecole.gestion.modele.DAOSalle;
 import ecole.gestion.vue.VueSalleInterface;
-import ecole.metier.Cours;
 import ecole.metier.Salle;
-
-import java.util.List;
-
 
 public class PresenterSalle {
 
@@ -97,14 +93,7 @@ public class PresenterSalle {
         }
     }
 
-    protected Salle affAll() {
-        List<Salle> ls = mds.readAll();
+    protected void affAll() {
         vues.affAll(mds.readAll());
-        do{
-            String chs=vues.getMsg("numéro de l'élément choisi (0 pour aucun) :");
-            int ch=Integer.parseInt(chs);
-            if(ch==0)return null;
-            if(ch>=1 && ch <= ls.size()) return ls.get(ch-1);
-        } while(true);
     }
 }

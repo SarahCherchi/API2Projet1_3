@@ -3,6 +3,8 @@ package ecole.gestion.presenter;
 import ecole.gestion.modele.DAOCours;
 import ecole.gestion.vue.VueCoursInterface;
 import ecole.metier.Cours;
+import ecole.metier.Salle;
+
 import java.util.List;
 
 public class PresenterCours {
@@ -47,7 +49,8 @@ public class PresenterCours {
     }
 
     protected void ajout() {
-        Cours newcr = vuec.create();
+        Salle s = ps.recherche();
+        Cours newcr = vuec.createSD(s);
         newcr = mdc.create(newcr);
         if (newcr == null) {
             vuec.displayMsg("erreur lors de la création du cours - doublon");

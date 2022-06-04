@@ -37,13 +37,13 @@ public class ModeleClasseDB implements DAOClasse {
     public List<Classe> readAll() {
         return null;
     }
-   /* protected Connection dbConnect;
+    protected Connection dbConnect;
 
     public ModeleClasseDB() {
         dbConnect = DBConnection.getConnection();
     }
 
-    @Override
+    /*@Override
     public Classe create(Classe cl) {
 
         String req1 = "insert into apiclasse(sigle,année,spécilité,nbreleves) values(?,?,?,?)";
@@ -75,16 +75,16 @@ public class ModeleClasseDB implements DAOClasse {
     @Override
     public Classe read(Classe classe) {
         String req = "select * from apiinfos where idclasse = ?";
-        try ( PreparedStatement pstm = dbConnect.prepareStatement(req);) {
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req);) {
             pstm.setInt(1, classe.getIdClasse());
-            ResultSet rs = pstm.executeQuery() ;
+            ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
                 String sigle = rs.getString("SIGLE");
                 int annee = rs.getInt("ANNEE");
                 String specialite = rs.getString("SPECIALITE");
                 int nbrEleves = rs.getInt("NOMBRE ELEVES");
-                Classe cl = new Classe(classe.getIdClasse(), sigle, annee, specialite,nbrEleves);
-                int idcl= rs.getInt("IDCLASSE");
+                Classe cl = new Classe(classe.getIdClasse(), sigle, annee, specialite, nbrEleves);
+                int idcl = rs.getInt("IDCLASSE");
 
                 List<Infos> linf = new ArrayList<>();
                 if (idcl != 0) {
@@ -98,7 +98,7 @@ public class ModeleClasseDB implements DAOClasse {
                         Classe pr = new Produit(idpr, numprod, description);
                         Ligne lg = new Ligne(pr, quant, pa);
                         linf.add(lg);
-                    } while(rs.next());
+                    } while (rs.next());
 
                 }
                 cf.setLignes(llg);
@@ -106,12 +106,8 @@ public class ModeleClasseDB implements DAOClasse {
             } else {
                 return null;
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
-
-        A continuer avec une vue trop dur sans
-
-*/
+    }*/
 }

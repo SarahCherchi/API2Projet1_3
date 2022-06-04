@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ModeleEnseignantDB implements DAOEnseignant {
@@ -54,20 +54,21 @@ public class ModeleEnseignantDB implements DAOEnseignant {
 
     @Override
     public Enseignant read(Enseignant enseignant) {
-        String req = "select * from apienseignant where idenseignant = ?";
+        String req = "select * from apienseignant where MATRICULE = ?";
         try ( PreparedStatement pstm = dbConnect.prepareStatement(req);) {
-            pstm.setInt(1, enseignant.getIdEnseignant());
+            String matricule = enseignant.getMatricule();
+            pstm.setString(1, matricule);
             ResultSet rs = pstm.executeQuery() ;
             if (rs.next()) {
-                String matricule = rs.getString("MATRICULE");
+                int idenseignant = rs.getInt("IDENSEIGNANT");
                 String nom = rs.getString("NOM");
                 String prenom = rs.getString("PRENOM");
                 String tel = rs.getString("TEL");
                 int chargeSem = rs.getInt("CHARGESEM");
                 BigDecimal salaireMensu = rs.getBigDecimal("SALAIREMENSU");
-                Date dateengag = rs.getDate("DATEENGAG");
+                LocalDate dateengag = rs.getDate("DATEENGAG").toLocalDate();
 
-                Enseignant ens = new Enseignant(enseignant.getIdEnseignant(),matricule, nom, prenom, tel,chargeSem,salaireMensu,dateengag);
+                Enseignant ens = new Enseignant(idenseignant,matricule, nom, prenom, tel,chargeSem,salaireMensu,dateengag);
                 return ens;
 
             } else {
@@ -133,7 +134,7 @@ public class ModeleEnseignantDB implements DAOEnseignant {
                 String tel = rs.getString("TEL");
                 int chargeSem = rs.getInt("CHARGESEM");
                 BigDecimal salaireMensu = rs.getBigDecimal("SALAIREMENSU");
-                Date dateengag = rs.getDate("DATEENGAG");
+                LocalDate dateengag = rs.getDate("DATEENGAG").toLocalDate();
                 le.add(new Enseignant(idenseignant,matricule, nom, prenom,tel,chargeSem,salaireMensu,dateengag));
             }
             if(le.isEmpty()) return null;

@@ -47,10 +47,10 @@ public class PresenterClasse {
                     suppression();
                     break;
                 case 5:
-                    addInfo();
+                   // addInfo();
                     break;
                 case 6:
-                    suppInfo();
+                   // suppInfo();
                     break;
                 case 7:
                     affAll();
@@ -114,7 +114,7 @@ public class PresenterClasse {
         }
     }
 
-    private void addInfo() {
+   /* private void addInfo() {
         Classe cl = recherche();
         if (cl == null) return;
         Cours c = pc.affAll();
@@ -148,7 +148,7 @@ public class PresenterClasse {
 
         if(res)vuecl.displayMsg("infos supprimée");
         else vuecl.displayMsg("infos pas supprimée");
-    }
+    } */
 
     protected void affAll() {
         vuecl.affAll(mdcl.readAll());
