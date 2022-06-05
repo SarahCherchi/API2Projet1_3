@@ -1,7 +1,5 @@
 package ecole.gestion.vue;
 
-import java.util.List;
-
 public interface VueCommuneInterface {
     int menu(String[] options);
 

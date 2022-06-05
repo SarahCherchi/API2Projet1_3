@@ -11,6 +11,12 @@ public class Infos {
     public Infos() {
     }
 
+    public Infos(Cours cours, int nbrHeures, Enseignant enseignant) {
+        this.cours = cours;
+        this.nbrHeures = nbrHeures;
+        this.enseignant = enseignant;
+    }
+
     public Infos(Cours cours) {
         this.cours = cours;
     }

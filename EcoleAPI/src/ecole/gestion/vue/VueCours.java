@@ -1,10 +1,7 @@
 package ecole.gestion.vue;
 
-
 import ecole.metier.Cours;
 import ecole.metier.Salle;
-
-
 import java.util.List;
 
 public class VueCours extends VueCommune implements VueCoursInterface {

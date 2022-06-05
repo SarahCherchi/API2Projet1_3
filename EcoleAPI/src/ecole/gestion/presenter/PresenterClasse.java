@@ -32,30 +32,24 @@ public class PresenterClasse {
     public void gestion() {
 
         do {
-            int ch = vuecl.menu(new String[]{"ajout","recherche","modification","suppression","ajout info","suppression info","affichage complet","fin"});
+            int ch = vuecl.menu(new String[]{"ajout","recherche","modification","suppression","affichage complet","fin"});
             switch (ch) {
                 case 1:
                     ajout();
                     break;
                 case 2:
-                    recherche();
+                    recherche(); // ne fonctionne pas car la vue sql renvoie aucune ligne
                     break;
                 case 3:
-                    modification();
+                    modification(); // fonctionne pas à cause de la recherche
                     break;
                 case 4:
-                    suppression();
+                    suppression(); //idem
                     break;
                 case 5:
-                   // addInfo();
-                    break;
-                case 6:
-                   // suppInfo();
-                    break;
-                case 7:
                     affAll();
                     break;
-                case 8:
+                case 6:
                     return;
             }
         } while (true);
@@ -114,45 +108,8 @@ public class PresenterClasse {
         }
     }
 
-   /* private void addInfo() {
-        Classe cl = recherche();
-        if (cl == null) return;
-        Cours c = pc.affAll();
-        if (c == null) return;
-        Salle s = ps.affAll();
-        if (s == null) return;
-        Enseignant e = pe.affAll();
-        if (e == null) return;
-        String nhs = vuecl.getMsg("nombres d'heures : ");
-        int nh = Integer.parseInt(nhs);
-
-        Infos i = new Infos(c, nh, s, e);
-        boolean res = mdcl.addInfo(cl,i);
-
-        if(res)vuecl.displayMsg("infos ajoutée");
-        else vuecl.displayMsg("infos pas ajoutée");
-    }
-
-    private void suppInfo() {
-        Classe cl = recherche();
-        if (cl == null) return;
-        Cours c = pc.affAll();
-        if (c == null) return;
-        Salle s = ps.affAll();
-        if (s == null) return;
-        Enseignant e = pe.affAll();
-        if (e == null) return;
-
-        Infos i = new Infos(c, 0, s, e);
-        boolean res = mdcl.suppInfo(cl,i);
-
-        if(res)vuecl.displayMsg("infos supprimée");
-        else vuecl.displayMsg("infos pas supprimée");
-    } */
-
     protected void affAll() {
         vuecl.affAll(mdcl.readAll());
     }
-
 }
 

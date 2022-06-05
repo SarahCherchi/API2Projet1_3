@@ -1,9 +1,7 @@
 package ecole.metier;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 public class Enseignant {
@@ -17,6 +15,11 @@ public class Enseignant {
     protected LocalDate dateEngag;
 
     public Enseignant() {
+    }
+
+    public Enseignant(int idEnseignant, String nom) {
+        this.idEnseignant = idEnseignant;
+        this.nom = nom;
     }
 
     public Enseignant(String matricule, String nom, String prenom, String tel, int chargeSem, BigDecimal salaireMensu, LocalDate dateEngag) {

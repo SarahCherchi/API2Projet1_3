@@ -6,6 +6,7 @@ import ecole.metier.Infos;
 import java.util.List;
 
 public class VueClasse extends VueCommune implements VueClasseInterface{
+
     @Override
     public Classe create() {
         String sigle= getMsg("sigle : ");

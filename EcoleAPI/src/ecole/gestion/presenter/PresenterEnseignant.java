@@ -3,9 +3,8 @@ package ecole.gestion.presenter;
 import ecole.gestion.modele.DAOEnseignant;
 import ecole.gestion.vue.VueEnseignantInterface;
 import ecole.metier.Enseignant;
-
 import java.math.BigDecimal;
-import java.util.List;
+
 
 public class PresenterEnseignant {
 

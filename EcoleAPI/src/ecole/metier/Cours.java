@@ -1,6 +1,5 @@
 package ecole.metier;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Cours {

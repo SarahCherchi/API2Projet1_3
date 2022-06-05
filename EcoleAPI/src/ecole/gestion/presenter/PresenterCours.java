@@ -5,8 +5,6 @@ import ecole.gestion.vue.VueCoursInterface;
 import ecole.metier.Cours;
 import ecole.metier.Salle;
 
-import java.util.List;
-
 public class PresenterCours {
     private DAOCours mdc;
     private VueCoursInterface vuec;
