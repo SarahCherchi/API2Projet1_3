@@ -1,6 +1,9 @@
 package ecole.gestion.modele;
 
 import ecole.metier.Classe;
+import ecole.metier.Cours;
+import ecole.metier.Infos;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,4 +58,9 @@ public class ModeleClasse implements DAOClasse{
         return mesClasse;
     }
 
+    /*
+    @Override
+    public boolean addCours(Cours c, int heures) {
+        return false;
+    }*/
 }

@@ -55,6 +55,8 @@ public class Classe {
         this.info = info;
     }
 
+
+
     public static int getIdClasseAct() {
         return idClasseAct;
     }

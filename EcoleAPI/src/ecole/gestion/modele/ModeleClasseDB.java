@@ -3,6 +3,7 @@ package ecole.gestion.modele;
 import ecole.metier.*;
 import myconnections.DBConnection;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,17 +45,75 @@ public class ModeleClasseDB implements DAOClasse {
 
     @Override
     public Classe read(Classe classe) {
-        String req = "select * from classesallecoursens where idclasse = ?";
+        String 	 req = "select * from vueapi2 where sigle = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(req);) {
-            pstm.setInt(1, classe.getIdClasse());
+            pstm.setString(1,classe.getSigle());
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                String sigle = rs.getString("SIGLE");
+                int idcl = rs.getInt("IDCLASSE");
                 int annee = rs.getInt("ANNÉE");
-                String specialite = rs.getString("SPECIALITÉ ");
+                String specialite = rs.getString("SPÉCIALITÉ");
                 int nbrEleves = rs.getInt("NBRELEVES");
-                Classe cl = new Classe(classe.getIdClasse(), sigle, annee, specialite, nbrEleves);
+                int idcours = rs.getInt("IDCOURS");
+                Classe cl = new Classe(idcl, classe.getSigle(), annee, specialite, nbrEleves);
+
+                List<Infos> linf = new ArrayList<>();
+                if (idcours != 0) {
+                    do {
+
+                        int idsalle = rs.getInt("IDSALLE");
+                        int cap = rs.getInt("CAPACITÉ");
+
+                        idcours = rs.getInt("IDCOURS");
+                        String code = rs.getString("CODE");
+                        String intitule = rs.getString("INTITULÉ");
+
+                        int idens = rs.getInt("IDENSEIGNANT");
+
+                        Salle sl = new Salle(idsalle,cap);
+                        Cours cr = new Cours(idcours,code, intitule,sl);
+
+                        if (idens != 0) {
+                            do {
+
+                                int nbrheures = rs.getInt("NBRHEURES");
+
+                                idens = rs.getInt("IDENSEIGNANT");
+                                String nom = rs.getString("NOM");
+
+                                Enseignant ens = new Enseignant(idens,nom);
+                                Infos inf = new Infos(cr,nbrheures,sl, ens);
+                                linf.add(inf);
+                            } while (rs.next());
+
+                        }
+
+                    } while (rs.next());
+
+                }
+                cl.setInfo(linf);
+                return cl;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /*@Override
+    public Classe read(Classe classe) {
+        String 	 req = "select * from view1 where sigle = ?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req);) {
+            pstm.setString(1,classe.getSigle());
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                int idc = rs.getInt("IDCLASSE");
+                int annee = rs.getInt("ANNÉE");
+                String specialite = rs.getString("SPÉCIALITÉ");
+                int nbrEleves = rs.getInt("NBRELEVES");
                 int idens = rs.getInt("IDENSEIGNANT");
+                Classe cl = new Classe(idc, classe.getSigle(), annee, specialite, nbrEleves);
 
                 List<Infos> linf = new ArrayList<>();
                 if (idens != 0) {
@@ -86,21 +145,21 @@ public class ModeleClasseDB implements DAOClasse {
         } catch (Exception e) {
             return null;
         }
-    }
+    } */
 
     @Override
     public Classe update(Classe cl) {
-        String req = "update apiclasse set nbreleves= ? where idclasse = ?";
+        String req = "update apiclasse set nbreleves= ? where sigle = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
 
-            pstm.setInt(5, cl.getIdClasse());
-            pstm.setString(1, cl.getSigle());
-            pstm.setInt(2, cl.getAnnee());
-            pstm.setString(3, cl.getSpecialite());
-            pstm.setInt(4, cl.getNbrEleves());
+            pstm.setString(2, cl.getSigle());
+            pstm.setInt(1,cl.getNbrEleves());
+
             int n = pstm.executeUpdate();
             if (n == 0) {
-                return null;
+                throw new Exception("Mise à jour non effectuée");
+
+               // return null;
             }
 
             return read(cl);
@@ -150,4 +209,17 @@ public class ModeleClasseDB implements DAOClasse {
             return null;
         }
     }
+
+  /*  @Override
+    public boolean addCours(Classe cl,Cours c, int heures) {
+        String req1 = "insert into apiinfo(idcours,idclasse,nbrheures) values(?,?,?) where idclasse = ?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req1))
+              {
+
+            pstm.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }*/
 }

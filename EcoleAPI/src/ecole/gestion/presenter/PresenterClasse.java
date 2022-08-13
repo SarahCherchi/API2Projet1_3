@@ -4,6 +4,8 @@ import ecole.gestion.modele.DAOClasse;
 import ecole.gestion.vue.VueClasseInterface;
 import ecole.metier.*;
 
+import java.util.List;
+
 public class PresenterClasse {
     private DAOClasse mdcl;
     private VueClasseInterface vuecl;
@@ -32,29 +34,82 @@ public class PresenterClasse {
     public void gestion() {
 
         do {
-            int ch = vuecl.menu(new String[]{"ajout","recherche","modification","suppression","affichage complet","fin"});
+            int ch = vuecl.menu(new String[]{"ajout","recherche","modification","suppression","affichage complet","plus d'option","fin"});
             switch (ch) {
                 case 1:
                     ajout();
                     break;
                 case 2:
-                    recherche(); // ne fonctionne pas car la vue sql renvoie aucune ligne
+                    recherche(); //CORRIGE
                     break;
                 case 3:
-                    modification(); // fonctionne pas à cause de la recherche
+                    modification(); //CORRIGE
                     break;
                 case 4:
-                    suppression(); //idem
+                    suppression(); //CORRIGE
                     break;
                 case 5:
                     affAll();
                     break;
                 case 6:
+                    optionSupp();
+                    break;
+                case 7:
                     return;
             }
         } while (true);
 
     }
+
+    private void optionSupp() {
+        Classe cl = recherche();
+
+        if (cl != null) {
+            do {
+                List l=null;
+                int ch = vuecl.menu(new String[]{"ajout cours", "liste enseignant et heures" ,"liste salle et heures","liste cours et heures","nombre heures totales","fin"});
+                switch (ch) {
+                    case 1:
+                       // l = cl.addCours();
+                        break;
+                    case 2:
+                        l = cl.listeenseignantsEtHeures();
+                        break;
+                    case 3:
+                        l= cl.listeSallesetHeures();
+                        break;
+                    case 4:
+                        l=cl.listeCoursEtHeures();
+                        break;
+                    case 5:
+                        //nbrHeuresTot();
+                        break;
+                    case 6:
+                        return;
+                }
+                if(l==null) {
+                    vuecl.displayMsg("une erreur s'est produite");
+                    continue;
+                }
+                if(l.isEmpty()) vuecl.displayMsg("aucun élément à afficher");
+                else vuecl.affAll(l);
+            }
+
+            while (true) ;
+        }
+    }
+
+    /*protected Classe nbrHeuresTot(){
+        String nrech = vuecl.read();
+        Classe cl = new Classe(0,nrech,0,"",0);
+        cl = mdcl.read(cl);
+        if (cl == null) {
+            vuecl.displayMsg("introuvable");
+            return null;
+        }
+        vuecl.displayNbrHeuresTot(cl);
+        return cl;
+    }*/
 
     protected void ajout() {
         Classe newcl = vuecl.create();
@@ -70,7 +125,7 @@ public class PresenterClasse {
     protected Classe recherche() {
 
         String nrech = vuecl.read();
-        Classe cl = new Classe(nrech, 0, "", 0);
+        Classe cl = new Classe(0,nrech, 0,"", 0,null);
         cl = mdcl.read(cl);
         if (cl == null) {
             vuecl.displayMsg("classe introuvable");
