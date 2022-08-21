@@ -72,21 +72,17 @@ public class VueClasse extends VueCommune implements VueClasseInterface{
         }
     }
 
-    /*@Override
-    public void displayNbrHeuresTot(Classe cl) {
-        displayMsg(cl.toString());
+    @Override
+    public void affLobj(List lobj) {
         int i =0;
-        int total;
-        int total2 = 0;
-        if(cl.getInfo()!= null && !cl.getInfo().isEmpty()) {
-            for (Infos infos : cl.getInfo()) {
-                displayMsg((++i) + "." + cl.toString());
-                total = infos.getNbrHeures();
-                total2 = total2 + total;
-            }
-
-            System.out.println("Les gains totaux de cette course sont : "+total2);
+        for(Object o:lobj){
+            displayMsg((++i)+"."+o.toString());
         }
-    }*/
+    }
+    @Override
+    public void affHT(int i) {
+        displayMsg("Le nombre d'heure total est de "+i);
+        }
+
 
 }

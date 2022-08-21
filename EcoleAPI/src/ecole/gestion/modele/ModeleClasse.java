@@ -58,6 +58,11 @@ public class ModeleClasse implements DAOClasse{
         return mesClasse;
     }
 
+    @Override
+    public int nbrHeuresTot(Classe cl) {
+        return cl.nbrHeuresTot();
+    }
+
     /*
     @Override
     public boolean addCours(Cours c, int heures) {

@@ -121,7 +121,6 @@ public class Classe {
                 ", annee=" + annee +
                 ", specialite='" + specialite + '\'' +
                 ", nbrEleves=" + nbrEleves +
-                ", info=" + info +
                 '}';
     }
 

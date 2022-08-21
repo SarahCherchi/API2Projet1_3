@@ -34,40 +34,49 @@ public class PresenterClasse {
     public void gestion() {
 
         do {
-            int ch = vuecl.menu(new String[]{"ajout","recherche","modification","suppression","affichage complet","plus d'option","fin"});
+            int ch = vuecl.menu(new String[]{"ajout","recherche","modification","suppression","affichage complet","nombre d'heure total","vérif capacité de la salle","plus d'affichage","plus d'option","fin"});
             switch (ch) {
                 case 1:
                     ajout();
                     break;
                 case 2:
-                    recherche(); //CORRIGE
+                    recherche(); //CORRIGÉ
                     break;
                 case 3:
-                    modification(); //CORRIGE
+                    modification(); //CORRIGÉ
                     break;
                 case 4:
-                    suppression(); //CORRIGE
+                    suppression(); //CORRIGÉ
                     break;
                 case 5:
                     affAll();
                     break;
                 case 6:
-                    optionSupp();
+                    nbrHeureTot();
                     break;
                 case 7:
+                    //salleCapaciteOK();
+                    break;
+                case 8:
+                    affichSupp();
+                    break;
+                case 9:
+                    //optionSupp();
+                    break;
+                case 10:
                     return;
             }
         } while (true);
 
     }
 
-    private void optionSupp() {
+    private void affichSupp() {
         Classe cl = recherche();
 
         if (cl != null) {
             do {
                 List l=null;
-                int ch = vuecl.menu(new String[]{"ajout cours", "liste enseignant et heures" ,"liste salle et heures","liste cours et heures","nombre heures totales","fin"});
+                int ch = vuecl.menu(new String[]{"ajout cours", "liste enseignant et heures" ,"liste salle et heures","liste cours et heures","fin"});
                 switch (ch) {
                     case 1:
                        // l = cl.addCours();
@@ -82,9 +91,6 @@ public class PresenterClasse {
                         l=cl.listeCoursEtHeures();
                         break;
                     case 5:
-                        //nbrHeuresTot();
-                        break;
-                    case 6:
                         return;
                 }
                 if(l==null) {
@@ -92,24 +98,30 @@ public class PresenterClasse {
                     continue;
                 }
                 if(l.isEmpty()) vuecl.displayMsg("aucun élément à afficher");
-                else vuecl.affAll(l);
+                else vuecl.affLobj(l);
             }
 
             while (true) ;
         }
     }
 
-    /*protected Classe nbrHeuresTot(){
+   /* private void optionSupp() {
+
+    }*/
+
+  protected void nbrHeureTot(){
         String nrech = vuecl.read();
         Classe cl = new Classe(0,nrech,0,"",0);
         cl = mdcl.read(cl);
         if (cl == null) {
             vuecl.displayMsg("introuvable");
-            return null;
         }
-        vuecl.displayNbrHeuresTot(cl);
-        return cl;
-    }*/
+        else{
+            int HT = mdcl.nbrHeuresTot(cl);
+            vuecl.affHT(HT);
+        }
+
+    }
 
     protected void ajout() {
         Classe newcl = vuecl.create();

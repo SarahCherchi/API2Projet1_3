@@ -222,4 +222,25 @@ public class ModeleClasseDB implements DAOClasse {
             return false;
         }
     }*/
+
+   @Override
+    public int nbrHeuresTot(Classe cl) {
+        String req = "select * from heuretot where idclasse = ?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req);) {
+            pstm.setInt(1, cl.getIdClasse());
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+                int nbrheureTot = rs.getInt("NBRHEURES");
+                return nbrheureTot;
+            }
+            else{
+                return 0;
+            }
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+
+
 }
