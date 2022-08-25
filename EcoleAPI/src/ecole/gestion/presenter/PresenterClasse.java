@@ -61,7 +61,7 @@ public class PresenterClasse {
                     affichSupp();
                     break;
                 case 9:
-                    //optionSupp();
+                    optionSupp();
                     break;
                 case 10:
                     return;
@@ -76,21 +76,18 @@ public class PresenterClasse {
         if (cl != null) {
             do {
                 List l=null;
-                int ch = vuecl.menu(new String[]{"ajout cours", "liste enseignant et heures" ,"liste salle et heures","liste cours et heures","fin"});
+                int ch = vuecl.menu(new String[]{"liste enseignant et heures" ,"liste salle et heures","liste cours et heures","fin"});
                 switch (ch) {
                     case 1:
-                       // l = cl.addCours();
-                        break;
-                    case 2:
                         l = cl.listeenseignantsEtHeures();
                         break;
-                    case 3:
+                    case 2:
                         l= cl.listeSallesetHeures();
                         break;
-                    case 4:
+                    case 3:
                         l=cl.listeCoursEtHeures();
                         break;
-                    case 5:
+                    case 4:
                         return;
                 }
                 if(l==null) {
@@ -105,11 +102,92 @@ public class PresenterClasse {
         }
     }
 
-   /* private void optionSupp() {
 
-    }*/
+    private void optionSupp() {
+        do {
+            int ch = vuecl.menu(new String[]{"ajout cours/heures","modification cours/enseignant ","modification cours/salle","modification cours/heures","suppression cours","fin"});
+            switch (ch) {
+                case 1:
+                    addCours();
+                    break;
+                case 2:
+                    modifCoursE();
+                    break;
+                case 3:
+                    modifCoursS();
+                    break;
+                case 4:
+                    modifCoursH();
+                    break;
+                case 5:
+                    suppCours();
+                    break;
+                case 6:
+                    return;
+            }
+        } while (true);
 
-  protected void nbrHeureTot(){
+    }
+
+    private void suppCours(){
+        Classe cl = recherche();
+        if (cl == null) return;
+        Cours c = pc.chCours();
+        if (c == null) return;
+        boolean res = mdcl.suppCours(cl,c);
+        if(res)vuecl.displayMsg("suppression effectuée");
+        else vuecl.displayMsg("la suppression n'a pas pu être effectué");
+    }
+
+    private void modifCoursH(){
+        Classe cl = recherche();
+        if (cl == null) return;
+        Cours c = pc.chCours();
+        if (c == null) return;
+        String hs = vuecl.getMsg("nombre d'heure : ");
+        int h = Integer.parseInt(hs);
+        boolean res = mdcl.modifCoursH(cl,c,h);
+        if(res)vuecl.displayMsg("modification effectuée");
+        else vuecl.displayMsg("la modification n'a pas pu être effectuée");
+    }
+
+    private void modifCoursS(){
+        Classe cl = recherche();
+        if (cl == null) return;
+        Cours c = pc.chCours();
+        if (c == null) return;
+        Salle s = ps.recherche();
+        if (s == null) return;
+        boolean res = mdcl.modifCoursS(cl,c,s);
+        if(res)vuecl.displayMsg("modification effectuée");
+        else vuecl.displayMsg("la modification n'a pas pu être effectuée");
+    }
+
+    private void modifCoursE(){
+        Classe cl = recherche();
+        if (cl == null) return;
+        Cours c = pc.chCours();
+        if (c == null) return;
+        Enseignant ens = pe.recherche();
+        if (ens == null) return;
+        boolean res = mdcl.modifCoursE(cl,c,ens);
+        if(res)vuecl.displayMsg("modification effectuée");
+        else vuecl.displayMsg("la modification n'a pas pu être effectuée");
+    }
+
+    private void addCours(){
+        Classe cl = recherche();
+        if (cl == null) return;
+        Cours c = pc.recherche();
+        if (c == null) return;
+        String hs = vuecl.getMsg("nombre d'heure : ");
+        int h = Integer.parseInt(hs);
+        boolean res = mdcl.addCours(cl,c,h);
+        if(res)vuecl.displayMsg("ajout effectué");
+        else vuecl.displayMsg("l'ajout n'a pas pu être effectué");
+    }
+
+    protected void nbrHeureTot(){
         String nrech = vuecl.read();
         Classe cl = new Classe(0,nrech,0,"",0);
         cl = mdcl.read(cl);

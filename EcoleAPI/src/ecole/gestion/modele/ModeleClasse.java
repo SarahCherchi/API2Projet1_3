@@ -1,8 +1,6 @@
 package ecole.gestion.modele;
 
-import ecole.metier.Classe;
-import ecole.metier.Cours;
-import ecole.metier.Infos;
+import ecole.metier.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,9 +61,28 @@ public class ModeleClasse implements DAOClasse{
         return cl.nbrHeuresTot();
     }
 
-    /*
     @Override
-    public boolean addCours(Cours c, int heures) {
-        return false;
-    }*/
+    public boolean addCours(Classe cl,Cours c, int heures) {
+        return cl.addCours(c,heures);
+    }
+
+    @Override
+    public boolean modifCoursE(Classe cl, Cours c, Enseignant ens) {
+        return cl.modifCours(c,ens);
+    }
+
+    @Override
+    public boolean modifCoursS(Classe cl, Cours c, Salle s) {
+        return cl.modifCours(c,s);
+    }
+
+    @Override
+    public boolean modifCoursH(Classe cl, Cours c, int heures) {
+        return cl.modifCours(c,heures);
+    }
+
+    @Override
+    public boolean suppCours(Classe cl, Cours c) {
+        return cl.suppCours(c);
+    }
 }

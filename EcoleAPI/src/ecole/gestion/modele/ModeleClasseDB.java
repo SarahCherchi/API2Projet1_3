@@ -3,7 +3,6 @@ package ecole.gestion.modele;
 import ecole.metier.*;
 import myconnections.DBConnection;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -210,20 +209,82 @@ public class ModeleClasseDB implements DAOClasse {
         }
     }
 
-  /*  @Override
+  @Override
     public boolean addCours(Classe cl,Cours c, int heures) {
-        String req1 = "insert into apiinfo(idcours,idclasse,nbrheures) values(?,?,?) where idclasse = ?";
-        try (PreparedStatement pstm = dbConnect.prepareStatement(req1))
+        String req = "insert into apiinfos(idcours,idclasse,nbrheures,idsalle) values(?,?,?,?)";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req))
               {
-
+                  pstm.setInt(1, c.getIdCours());
+                  pstm.setInt(2, cl.getIdClasse());
+                  pstm.setInt(3, heures);
+                  pstm.setInt(4, c.getSalleParDefault().getIdSalle());
             pstm.executeUpdate();
             return true;
         } catch (Exception e) {
             return false;
         }
-    }*/
+    }
 
-   @Override
+    @Override
+    public boolean modifCoursE(Classe cl, Cours c, Enseignant ens) {
+        String req = "update apiinfos set idenseignant=? where idclasse=? and idcours=?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req))
+        {
+            pstm.setInt(1, ens.getIdEnseignant());
+            pstm.setInt(2, cl.getIdClasse());
+            pstm.setInt(3, c.getIdCours());
+            pstm.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean modifCoursS(Classe cl, Cours c, Salle s) {
+        String req = "update apiinfos set idsalle=? where idclasse=? and idcours=?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req))
+        {
+            pstm.setInt(1, s.getIdSalle());
+            pstm.setInt(2, cl.getIdClasse());
+            pstm.setInt(3, c.getIdCours());
+            pstm.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean modifCoursH(Classe cl, Cours c, int heures) {
+        String req = "update apiinfos set nbrheures=? where idclasse=? and idcours=?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req))
+        {
+            pstm.setInt(1, heures);
+            pstm.setInt(2, cl.getIdClasse());
+            pstm.setInt(3, c.getIdCours());
+            pstm.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean suppCours(Classe cl, Cours c) {
+        String req = "delete from apiinfos where idclasse=? and idcours=?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req))
+        {
+            pstm.setInt(1, cl.getIdClasse());
+            pstm.setInt(2, c.getIdCours());
+            pstm.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
     public int nbrHeuresTot(Classe cl) {
         String req = "select * from heuretot where idclasse = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(req);) {
@@ -240,7 +301,5 @@ public class ModeleClasseDB implements DAOClasse {
             return 0;
         }
     }
-
-
 
 }

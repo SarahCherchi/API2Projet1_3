@@ -36,6 +36,11 @@ public class Cours {
         this.salleParDefault = salleParDefault;
     }
 
+    public Cours(int idCours, Salle salleParDefault) {
+        this.idCours = idCours;
+        this.salleParDefault = salleParDefault;
+    }
+
     public int getIdCours() {
         return idCours;
     }

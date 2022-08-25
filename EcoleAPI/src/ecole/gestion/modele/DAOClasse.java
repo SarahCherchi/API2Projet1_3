@@ -1,13 +1,13 @@
 package ecole.gestion.modele;
 
-import ecole.metier.Classe;
-import ecole.metier.Cours;
-import ecole.metier.Infos;
-
-import java.util.List;
+import ecole.metier.*;
 
 public interface DAOClasse extends DAO<Classe>{
-    //boolean addCours(Classe rechcl, Cours c, int heures);
-    //boolean salleCapaciteOK(Classe clrech);
+    boolean addCours(Classe cl, Cours c, int heures);
+    boolean modifCoursE(Classe cl, Cours c, Enseignant ens);
+    boolean modifCoursS(Classe cl, Cours c, Salle s);
+    boolean modifCoursH(Classe cl, Cours c, int heures);
+    boolean suppCours(Classe cl, Cours c);
+    //boolean salleCapaciteOK(Classe cl);
     int nbrHeuresTot(Classe cl);
 }
