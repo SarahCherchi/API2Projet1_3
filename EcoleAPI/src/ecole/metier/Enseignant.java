@@ -22,6 +22,14 @@ public class Enseignant {
         this.nom = nom;
     }
 
+    public Enseignant(int idEnseignant, String matricule, String nom, String prenom, String tel) {
+        this.idEnseignant = idEnseignant;
+        this.matricule = matricule;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.tel = tel;
+    }
+
     public Enseignant(String matricule, String nom, String prenom, String tel, int chargeSem, BigDecimal salaireMensu, LocalDate dateEngag) {
         this.matricule = matricule;
         this.nom = nom;

@@ -29,6 +29,12 @@ public class Salle {
         this.capacité = capacité;
     }
 
+    public Salle(int idSalle, int capacité, List<Cours> cours) {
+        this.idSalle = idSalle;
+        this.capacité = capacité;
+        this.cours = cours;
+    }
+
     public int getIdSalle() {
         return idSalle;
     }

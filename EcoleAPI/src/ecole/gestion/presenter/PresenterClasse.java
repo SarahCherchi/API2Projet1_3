@@ -40,13 +40,13 @@ public class PresenterClasse {
                     ajout();
                     break;
                 case 2:
-                    recherche(); //CORRIGÉ
+                    recherche();
                     break;
                 case 3:
-                    modification(); //CORRIGÉ
+                    modification();
                     break;
                 case 4:
-                    suppression(); //CORRIGÉ
+                    suppression();
                     break;
                 case 5:
                     affAll();
@@ -102,10 +102,9 @@ public class PresenterClasse {
         }
     }
 
-
     private void optionSupp() {
         do {
-            int ch = vuecl.menu(new String[]{"ajout cours/heures","modification cours/enseignant ","modification cours/salle","modification cours/heures","suppression cours","fin"});
+            int ch = vuecl.menu(new String[]{"ajout cours/heures","modification enseignant ","modification salle","modification heures","suppression cours","fin"});
             switch (ch) {
                 case 1:
                     addCours();

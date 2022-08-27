@@ -44,7 +44,7 @@ public class ModeleClasseDB implements DAOClasse {
 
     @Override
     public Classe read(Classe classe) {
-        String 	 req = "select * from vueapi2 where sigle = ?";
+        String 	 req = "select * from VUE_CLASSE_INFOS where sigle = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(req);) {
             pstm.setString(1,classe.getSigle());
             ResultSet rs = pstm.executeQuery();
@@ -59,33 +59,28 @@ public class ModeleClasseDB implements DAOClasse {
                 List<Infos> linf = new ArrayList<>();
                 if (idcours != 0) {
                     do {
-
-                        int idsalle = rs.getInt("IDSALLE");
-                        int cap = rs.getInt("CAPACITÉ");
-
                         idcours = rs.getInt("IDCOURS");
                         String code = rs.getString("CODE");
                         String intitule = rs.getString("INTITULÉ");
 
-                        int idens = rs.getInt("IDENSEIGNANT");
+                        int idsalle = rs.getInt("IDSALLE");
+                        String sigle = rs.getString("SIGLES");
+                        int cap = rs.getInt("CAPACITÉ");
 
-                        Salle sl = new Salle(idsalle,cap);
+                        Salle sl = new Salle(idsalle,sigle,cap);
                         Cours cr = new Cours(idcours,code, intitule,sl);
 
-                        if (idens != 0) {
-                            do {
+                        int nbrheures = rs.getInt("NBRHEURES");
 
-                                int nbrheures = rs.getInt("NBRHEURES");
+                        int idens = rs.getInt("IDENSEIGNANT");
+                        String mat = rs.getString("MATRICULE");
+                        String nom = rs.getString("NOM");
+                        String prenom = rs.getString("PRENOM");
+                        String tel = rs.getString("TEL");
 
-                                idens = rs.getInt("IDENSEIGNANT");
-                                String nom = rs.getString("NOM");
-
-                                Enseignant ens = new Enseignant(idens,nom);
-                                Infos inf = new Infos(cr,nbrheures,sl, ens);
-                                linf.add(inf);
-                            } while (rs.next());
-
-                        }
+                        Enseignant ens = new Enseignant(idens,mat,nom,prenom,tel);
+                        Infos inf = new Infos(cr,nbrheures,sl, ens);
+                        linf.add(inf);
 
                     } while (rs.next());
 
@@ -100,51 +95,6 @@ public class ModeleClasseDB implements DAOClasse {
         }
     }
 
-    /*@Override
-    public Classe read(Classe classe) {
-        String 	 req = "select * from view1 where sigle = ?";
-        try (PreparedStatement pstm = dbConnect.prepareStatement(req);) {
-            pstm.setString(1,classe.getSigle());
-            ResultSet rs = pstm.executeQuery();
-            if (rs.next()) {
-                int idc = rs.getInt("IDCLASSE");
-                int annee = rs.getInt("ANNÉE");
-                String specialite = rs.getString("SPÉCIALITÉ");
-                int nbrEleves = rs.getInt("NBRELEVES");
-                int idens = rs.getInt("IDENSEIGNANT");
-                Classe cl = new Classe(idc, classe.getSigle(), annee, specialite, nbrEleves);
-
-                List<Infos> linf = new ArrayList<>();
-                if (idens != 0) {
-                    do {
-                        String code = rs.getString("CODE");
-                        String intitule = rs.getString("INTITULÉ");
-
-                        int idsalle = rs.getInt("IDSALLE");
-                        int cap = rs.getInt("CAPACITÉ");
-
-                        int nbrheures = rs.getInt("NBRHEURES");
-
-                        idens = rs.getInt("IDENSEIGNANT");
-                        String nom = rs.getString("NOM");
-
-                        Cours cr = new Cours(code, intitule);
-                        Salle sl = new Salle(idsalle,cap);
-                        Enseignant ens = new Enseignant(idens,nom);
-                        Infos inf = new Infos(cr,nbrheures,sl, ens);
-                        linf.add(inf);
-                    } while (rs.next());
-
-                }
-                cl.setInfo(linf);
-                return cl;
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
-            return null;
-        }
-    } */
 
     @Override
     public Classe update(Classe cl) {
@@ -157,8 +107,6 @@ public class ModeleClasseDB implements DAOClasse {
             int n = pstm.executeUpdate();
             if (n == 0) {
                 throw new Exception("Mise à jour non effectuée");
-
-               // return null;
             }
 
             return read(cl);

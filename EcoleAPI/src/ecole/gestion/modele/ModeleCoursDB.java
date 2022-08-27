@@ -21,7 +21,7 @@ public class ModeleCoursDB implements DAOCours {
     public Cours create(Cours cr) {
 
         String req1 = "insert into apicours(code,intitulé,idsalle) values(?,?,?)";
-        String req2 = "select MAX(idcours) from apicours where idsalle=? ";
+        String req2 = "select idcours from apicours where code=?";
         try (PreparedStatement pstm1 = dbConnect.prepareStatement(req1); PreparedStatement pstm2 = dbConnect.prepareStatement(req2)) {
             pstm1.setString(1, cr.getCode());
             pstm1.setString(2, cr.getIntitule());
@@ -30,7 +30,7 @@ public class ModeleCoursDB implements DAOCours {
             if (n == 0) {
                 return null;
             }
-            pstm2.setInt(1, cr.getSalleParDefault().getIdSalle());
+            pstm2.setString(1, cr.getCode());
             ResultSet rs = pstm2.executeQuery();
             if (rs.next()) {
                 int idcours = rs.getInt(1);
@@ -47,7 +47,7 @@ public class ModeleCoursDB implements DAOCours {
     @Override
     public Cours read(Cours cours) {
         String req = "select * from sallecours where CODE = ?";
-        try (PreparedStatement pstm = dbConnect.prepareStatement(req);) {
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
             pstm.setString(1, cours.getCode());
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
