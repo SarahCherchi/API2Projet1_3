@@ -8,6 +8,6 @@ public interface DAOClasse extends DAO<Classe>{
     boolean modifCoursS(Classe cl, Cours c, Salle s);
     boolean modifCoursH(Classe cl, Cours c, int heures);
     boolean suppCours(Classe cl, Cours c);
-    //boolean salleCapaciteOK(Classe cl);
+    boolean salleCapaciteOk(Classe cl, Salle s);
     int nbrHeuresTot(Classe cl);
 }

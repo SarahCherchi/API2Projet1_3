@@ -85,4 +85,9 @@ public class ModeleClasse implements DAOClasse{
     public boolean suppCours(Classe cl, Cours c) {
         return cl.suppCours(c);
     }
+
+    @Override
+    public boolean salleCapaciteOk(Classe cl, Salle s) {
+        return false;
+    }
 }

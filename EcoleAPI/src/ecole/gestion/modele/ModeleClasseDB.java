@@ -4,6 +4,7 @@ import ecole.metier.*;
 import myconnections.DBConnection;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -228,6 +229,28 @@ public class ModeleClasseDB implements DAOClasse {
             pstm.executeUpdate();
             return true;
         } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean salleCapaciteOk(Classe cl,Salle s) {
+        String req1 = "select nbreleves from apiclasse where idclasse=?";
+        String req2 = "select capacité from apisalle where idsalle=?";
+        try ( PreparedStatement pstm1 = dbConnect.prepareStatement(req1);  PreparedStatement pstm2 = dbConnect.prepareStatement(req2)) {
+            pstm1.setInt(1, cl.getIdClasse());
+            pstm1.executeUpdate();
+
+            pstm2.setInt(1, s.getIdSalle());
+            pstm2.executeQuery();
+            if (cl.getNbrEleves()<= s.getCapacité()) {
+
+                return true;
+            } else {
+                return false;
+            }
+        }
+        catch (Exception e){
             return false;
         }
     }

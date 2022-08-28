@@ -55,7 +55,7 @@ public class PresenterClasse {
                     nbrHeureTot();
                     break;
                 case 7:
-                    //salleCapaciteOK();
+                    salleCapaciteOk();
                     break;
                 case 8:
                     affichSupp();
@@ -184,6 +184,17 @@ public class PresenterClasse {
         boolean res = mdcl.addCours(cl,c,h);
         if(res)vuecl.displayMsg("ajout effectué");
         else vuecl.displayMsg("l'ajout n'a pas pu être effectué");
+    }
+
+    private void salleCapaciteOk(){
+        Classe cl = recherche();
+        if (cl == null) return;
+        Salle s = ps.recherche();
+        if (s == null) return;
+        boolean res = mdcl.salleCapaciteOk(cl,s);
+        if(res)vuecl.displayMsg("la capacité est ok");
+        else vuecl.displayMsg("capacité insuffisante");
+
     }
 
     protected void nbrHeureTot(){
